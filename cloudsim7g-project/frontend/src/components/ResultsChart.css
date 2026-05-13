@@ -1,0 +1,157 @@
+.charts-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.charts-section h3 {
+  margin: 0 0 25px 0;
+  font-size: 1.3em;
+  color: #333;
+  border-bottom: 2px solid #e0e6ed;
+  padding-bottom: 10px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.chart-container {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #e0e6ed;
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.chart-container h4 {
+  margin: 0 0 15px 0;
+  font-size: 1.1em;
+  color: #333;
+  font-weight: 600;
+}
+
+.recharts-responsive-container {
+  margin: 0 auto;
+}
+
+.stats-display {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.stat-item {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 3px solid #0066cc;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-val {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #0066cc;
+}
+
+.stat-val-large {
+  font-size: 2em;
+  color: #333;
+}
+
+.stat-val-success {
+  color: #28a745;
+}
+
+.stat-val-danger {
+  color: #dc3545;
+}
+
+.efficiency-display {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.efficiency-item {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e0e6ed;
+  text-align: center;
+}
+
+.efficiency-label {
+  font-size: 0.8em;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.efficiency-value {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #0066cc;
+}
+
+/* Recharts Customization */
+.recharts-surface {
+  overflow: visible;
+}
+
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 15px;
+  }
+
+  .chart-container h4 {
+    font-size: 1em;
+  }
+
+  .stats-display,
+  .efficiency-display {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item,
+  .efficiency-item {
+    padding: 10px;
+  }
+
+  .stat-val,
+  .efficiency-value {
+    font-size: 1.2em;
+  }
+
+  .stat-val-large {
+    font-size: 1.6em;
+  }
+}
