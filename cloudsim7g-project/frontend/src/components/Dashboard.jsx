@@ -11,6 +11,15 @@ function Dashboard({ stats, simulations, onNewSimulation }) {
 
   const successRate = stats.successRate ? (stats.successRate * 100).toFixed(1) : '0';
 
+  const formatTime = (seconds) => {
+    if (seconds >= 86400) return { value: Number((seconds / 86400).toFixed(2)).toLocaleString(), unit: 'days' };
+    if (seconds >= 3600) return { value: Number((seconds / 3600).toFixed(2)).toLocaleString(), unit: 'hours' };
+    if (seconds >= 60) return { value: Number((seconds / 60).toFixed(2)).toLocaleString(), unit: 'minutes' };
+    return { value: Number((seconds || 0).toFixed(2)).toLocaleString(), unit: 'seconds' };
+  };
+
+  const avgTime = formatTime(stats.averageExecutionTime || 0);
+
   return (
     <div className="dashboard">
       <section className="dashboard-header glass-panel">
@@ -47,21 +56,21 @@ function Dashboard({ stats, simulations, onNewSimulation }) {
         <div className="stats-grid">
           <StatsCard
             title="Total Simulations"
-            value={stats.totalSimulations || 0}
+            value={Number(stats.totalSimulations || 0).toLocaleString()}
             unit=""
             icon="📊"
             color="primary"
           />
           <StatsCard
             title="Avg. Execution Time"
-            value={(stats.averageExecutionTime || 0).toFixed(2)}
-            unit="seconds"
+            value={avgTime.value}
+            unit={avgTime.unit}
             icon="⏱️"
             color="secondary"
           />
           <StatsCard
             title="Average Cost"
-            value={(stats.averageCost || 0).toFixed(2)}
+            value={Number((stats.averageCost || 0).toFixed(2)).toLocaleString()}
             unit="units"
             icon="💰"
             color="success"
@@ -75,7 +84,7 @@ function Dashboard({ stats, simulations, onNewSimulation }) {
           />
           <StatsCard
             title="Total Cloudlets"
-            value={stats.totalCloudlets || 0}
+            value={Number(stats.totalCloudlets || 0).toLocaleString()}
             unit="processed"
             icon="☁️"
             color="warning"
@@ -99,14 +108,14 @@ function Dashboard({ stats, simulations, onNewSimulation }) {
                 <div className="sim-info">
                   <h4>{sim.simulationName}</h4>
                   <div className="sim-badges">
-                    <span className="info-badge">☁️ {sim.totalCloudlets} Cloudlets</span>
-                    <span className="info-badge">⏱️ {sim.totalExecutionTime.toFixed(2)}s</span>
-                    <span className="info-badge">💰 ${sim.totalCostOfExecution.toFixed(2)}</span>
+                    <span className="info-badge">☁️ {Number(sim.totalCloudlets).toLocaleString()} Cloudlets</span>
+                    <span className="info-badge">⏱️ {formatTime(sim.totalExecutionTime).value} {formatTime(sim.totalExecutionTime).unit}</span>
+                    <span className="info-badge">💰 ${Number(sim.totalCostOfExecution.toFixed(2)).toLocaleString()}</span>
                   </div>
                 </div>
                 <div className="sim-status">
                   <span className={`status-pill ${sim.successfulCloudlets === sim.totalCloudlets ? 'success' : 'warning'}`}>
-                    {sim.successfulCloudlets}/{sim.totalCloudlets} Successful
+                    {Number(sim.successfulCloudlets).toLocaleString()}/{Number(sim.totalCloudlets).toLocaleString()} Successful
                   </span>
                 </div>
               </div>

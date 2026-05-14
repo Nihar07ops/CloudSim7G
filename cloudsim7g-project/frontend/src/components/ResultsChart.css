@@ -6,34 +6,39 @@
 .charts-section h3 {
   margin: 0 0 25px 0;
   font-size: 1.3em;
-  color: #333;
-  border-bottom: 2px solid #e0e6ed;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 10px;
 }
 
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
   gap: 25px;
   margin-top: 20px;
 }
 
 .chart-container {
-  background: #fafbfc;
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid #e0e6ed;
-  transition: all 0.3s ease;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .chart-container:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: rgba(30, 41, 59, 0.6);
+  border-color: var(--primary-light);
 }
 
 .chart-container h4 {
   margin: 0 0 15px 0;
   font-size: 1.1em;
-  color: #333;
+  color: var(--text-main);
   font-weight: 600;
 }
 
@@ -49,41 +54,46 @@
 }
 
 .stat-item {
-  background: white;
+  background: rgba(30, 41, 59, 0.5);
   padding: 15px;
-  border-radius: 6px;
-  border-left: 3px solid #0066cc;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--primary-color);
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .stat-label {
   font-size: 0.85em;
-  color: #666;
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .stat-val {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 700;
-  color: #0066cc;
+  color: var(--primary-color);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .stat-val-large {
-  font-size: 2em;
-  color: #333;
+  font-size: 1.5em;
+  color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .stat-val-success {
-  color: #28a745;
+  color: var(--accent-color);
 }
 
 .stat-val-danger {
-  color: #dc3545;
+  color: var(--danger-color);
 }
 
 .efficiency-display {
@@ -94,16 +104,19 @@
 }
 
 .efficiency-item {
-  background: white;
+  background: rgba(30, 41, 59, 0.5);
   padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #e0e6ed;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
   text-align: center;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .efficiency-label {
   font-size: 0.8em;
-  color: #666;
+  color: var(--text-muted);
   font-weight: 600;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -111,14 +124,33 @@
 }
 
 .efficiency-value {
-  font-size: 1.4em;
+  font-size: 1.1em;
   font-weight: 700;
-  color: #0066cc;
+  color: var(--secondary-color);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Recharts Customization */
 .recharts-surface {
   overflow: visible;
+}
+
+.recharts-text {
+  fill: var(--text-muted) !important;
+  font-size: 0.8em;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border-color) !important;
+}
+
+.recharts-default-tooltip {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-main) !important;
 }
 
 @media (max-width: 1024px) {

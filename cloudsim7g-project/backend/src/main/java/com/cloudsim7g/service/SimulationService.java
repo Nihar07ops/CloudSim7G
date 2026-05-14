@@ -49,6 +49,17 @@ public class SimulationService {
                 throw new IllegalArgumentException("Cloudlet configuration is required");
             }
             
+            // Add safety limits to prevent OutOfMemoryErrors
+            if (config.getVmConfig().getNumVms() > 1000) {
+                throw new IllegalArgumentException("Maximum number of VMs allowed is 1000 to prevent system instability.");
+            }
+            if (config.getCloudletConfig().getNumCloudlets() > 10000) {
+                throw new IllegalArgumentException("Maximum number of Cloudlets allowed is 10,000 to prevent memory exhaustion.");
+            }
+            if (config.getDatacenterConfig().getNumHosts() > 500) {
+                throw new IllegalArgumentException("Maximum number of Hosts allowed is 500.");
+            }
+            
             // Create a new CloudSim instance
             CloudSim cloudsim = new CloudSim();
             
@@ -180,7 +191,8 @@ public class SimulationService {
         
         for (Cloudlet cloudlet : finishedCloudlets) {
             totalExecutionTime += cloudlet.getActualCpuTime();
-            totalCost += (cloudlet.getActualCpuTime() * 0.1); // Simplified cost model
+            // Realistic AWS-style pricing: ~$0.04 per hour for a standard VM -> ~$0.000011 per CPU second
+            totalCost += (cloudlet.getActualCpuTime() * 0.000011); 
             if (cloudlet.getStatus() == Cloudlet.Status.SUCCESS) {
                 successfulCloudlets++;
             }
@@ -199,7 +211,7 @@ public class SimulationService {
                 .successfulCloudlets(successfulCloudlets)
                 .averageCloudletExecutionTime(averageExecutionTime)
                 .totalCostOfExecution(totalCost)
-                .totalWattHoursOfEnergy(calculateTotalEnergy(vms))
+                .totalWattHoursOfEnergy(calculateTotalEnergy(vms, totalExecutionTime))
                 .averageCpuUtilization(averageCpuUtilization)
                 .averageRamUtilization(0.5) // Placeholder
                 .simulationDuration(simulationDuration)
@@ -224,11 +236,13 @@ public class SimulationService {
     }
 
     /**
-     * Calculates total energy consumption (placeholder for demonstration)
+     * Calculates total energy consumption
      */
-    private double calculateTotalEnergy(List<Vm> vms) {
-        // Simplified energy model: energy = power * time
-        // In real scenarios, this would be more sophisticated
-        return vms.size() * 100; // Placeholder: assume 100 Wh per VM
+    private double calculateTotalEnergy(List<Vm> vms, double totalExecutionTimeSeconds) {
+        // Realistic energy model: Average server draws ~200 Watts when active.
+        // Energy in Watt-hours = (Watts * Hours)
+        // Convert total CPU seconds to hours, multiply by average power draw
+        double totalExecutionHours = totalExecutionTimeSeconds / 3600.0;
+        return (vms.size() > 0 ? (totalExecutionHours * 200.0) : 0);
     }
 }
