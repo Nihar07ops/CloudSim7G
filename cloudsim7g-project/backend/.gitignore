@@ -55,3 +55,9 @@ dependency-reduced-pom.xml
 *.db
 *.sqlite
 application-local.properties
+oracleJdk-26/
+maven/
+node_modules/
+target/
+dist/
+build/
