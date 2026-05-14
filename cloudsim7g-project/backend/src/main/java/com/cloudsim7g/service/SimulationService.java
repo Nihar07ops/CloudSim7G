@@ -172,7 +172,7 @@ public class SimulationService {
         long simulationDuration = System.currentTimeMillis() - startTime;
         
         List<Cloudlet> finishedCloudlets = broker.getCloudletFinishedList();
-        List<Vm> vms = broker.getVmExecList();
+        List<Vm> vms = broker.getVmCreatedList();
         
         double totalExecutionTime = 0;
         double totalCost = 0;
@@ -181,7 +181,7 @@ public class SimulationService {
         for (Cloudlet cloudlet : finishedCloudlets) {
             totalExecutionTime += cloudlet.getActualCpuTime();
             totalCost += (cloudlet.getActualCpuTime() * 0.1); // Simplified cost model
-            if (cloudlet.getStatus() == Cloudlet.Status.SUCCESS) {
+            if (cloudlet.isFinished()) {
                 successfulCloudlets++;
             }
         }
@@ -218,7 +218,7 @@ public class SimulationService {
         if (vms.isEmpty()) return 0;
         
         return vms.stream()
-                .mapToDouble(vm -> vm.getCpuPercentUtilization())
+                .mapToDouble(vm -> vm.getCpuUtilizationStats().getMean())
                 .average()
                 .orElse(0);
     }

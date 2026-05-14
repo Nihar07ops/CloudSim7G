@@ -1,27 +1,32 @@
 :root {
-  --primary-color: #4f46e5;      /* Indigo 600 */
-  --primary-hover: #4338ca;      /* Indigo 700 */
-  --primary-light: #e0e7ff;      /* Indigo 100 */
-  --secondary-color: #0ea5e9;    /* Light Blue 500 */
-  --accent-color: #10b981;       /* Emerald 500 */
-  --danger-color: #ef4444;       /* Red 500 */
-  --warning-color: #f59e0b;      /* Amber 500 */
+  /* Colors */
+  --bg-color: #0b0f19;
+  --bg-secondary: #131b2c;
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-light: rgba(99, 102, 241, 0.15);
+  --secondary-color: #0ea5e9;
+  --accent-color: #10b981;
+  --danger-color: #f43f5e;
+  --warning-color: #f59e0b;
   
-  --bg-color: #f8fafc;           /* Slate 50 */
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --card-border: rgba(255, 255, 255, 0.5);
-  --text-main: #1e293b;          /* Slate 800 */
-  --text-muted: #64748b;         /* Slate 500 */
-  --border-color: #e2e8f0;       /* Slate 200 */
+  /* UI Elements */
+  --card-bg: rgba(19, 27, 44, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
   
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.2);
+  /* Shadows and Effects */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 24px rgba(99, 102, 241, 0.3);
   
+  /* Spacing */
   --radius-md: 12px;
-  --radius-lg: 16px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -33,8 +38,11 @@
 body {
   color: var(--text-main);
   background: var(--bg-color);
-  background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0.05) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,0.05) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,0.05) 0, transparent 50%);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.08), transparent 25%);
   background-attachment: fixed;
+  font-family: 'Inter', sans-serif;
 }
 
 .app {
@@ -44,38 +52,29 @@ body {
 }
 
 .app-header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: white;
-  padding: 40px 20px;
+  padding: 50px 20px;
   text-align: center;
-  box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
-}
-
-.app-header::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9zdmc+') repeat;
-  pointer-events: none;
+  border-bottom: 1px solid var(--border-color);
+  background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
 }
 
 .app-header h1 {
-  font-size: 2.8em;
+  font-size: 3.2em;
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
   margin-bottom: 12px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
 }
 
 .subtitle {
-  font-size: 1.2em;
-  font-weight: 300;
-  opacity: 0.9;
+  font-size: 1.15em;
+  font-weight: 400;
+  color: var(--text-muted);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -83,67 +82,68 @@ body {
 .tabs {
   display: flex;
   justify-content: center;
-  background: white;
+  background: rgba(11, 15, 25, 0.8);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   padding: 0 20px;
-  gap: 10px;
+  gap: 8px;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
 }
 
 .tab {
-  padding: 16px 32px;
+  padding: 18px 32px;
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.05em;
+  font-size: 1em;
   color: var(--text-muted);
-  border-bottom: 3px solid transparent;
+  border-bottom: 2px solid transparent;
   transition: var(--transition);
-  font-weight: 600;
+  font-weight: 500;
   position: relative;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .tab:hover {
-  color: var(--primary-color);
-  background: var(--primary-light);
-  border-radius: 8px 8px 0 0;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .tab.active {
-  color: var(--primary-color);
+  color: #fff;
   border-bottom-color: var(--primary-color);
 }
 
 .app-content {
   flex: 1;
-  padding: 40px 20px;
+  padding: 48px 20px;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .app-footer {
-  background: white;
   border-top: 1px solid var(--border-color);
-  padding: 24px;
+  padding: 32px;
   text-align: center;
   color: var(--text-muted);
-  font-size: 0.95em;
+  font-size: 0.9em;
   margin-top: auto;
+  background: rgba(11, 15, 25, 0.8);
 }
 
 @media (max-width: 768px) {
-  .app-header h1 { font-size: 2em; }
+  .app-header h1 { font-size: 2.4em; }
   .tabs { justify-content: flex-start; overflow-x: auto; padding: 0 10px; }
-  .tab { padding: 14px 20px; font-size: 0.95em; white-space: nowrap; }
-  .app-content { padding: 20px 10px; }
+  .tab { padding: 16px 20px; font-size: 0.95em; white-space: nowrap; }
+  .app-content { padding: 32px 10px; }
 }

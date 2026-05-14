@@ -91,7 +91,7 @@ function SimulationResults({ simulations, currentSimulation, onDelete }) {
                   <div className="metric-card">
                     <div className="metric-label">Total Execution Time</div>
                     <div className="metric-value">
-                      {selectedSim.totalExecutionTime.toFixed(2)} <span className="metric-unit">seconds</span>
+                      {selectedSim.totalExecutionTime.toFixed(6)} <span className="metric-unit">seconds</span>
                     </div>
                   </div>
 
@@ -119,21 +119,21 @@ function SimulationResults({ simulations, currentSimulation, onDelete }) {
                   <div className="metric-card">
                     <div className="metric-label">Average Execution Time per Cloudlet</div>
                     <div className="metric-value">
-                      {selectedSim.averageCloudletExecutionTime.toFixed(2)} <span className="metric-unit">seconds</span>
+                      {selectedSim.averageCloudletExecutionTime.toFixed(6)} <span className="metric-unit">seconds</span>
                     </div>
                   </div>
 
                   <div className="metric-card">
                     <div className="metric-label">Total Cost</div>
                     <div className="metric-value">
-                      ${selectedSim.totalCostOfExecution.toFixed(2)}
+                      ${selectedSim.totalCostOfExecution.toFixed(6)}
                     </div>
                   </div>
 
                   <div className="metric-card">
                     <div className="metric-label">Total Energy</div>
                     <div className="metric-value">
-                      {selectedSim.totalWattHoursOfEnergy.toFixed(2)} <span className="metric-unit">Wh</span>
+                      {selectedSim.totalWattHoursOfEnergy.toFixed(6)} <span className="metric-unit">Wh</span>
                     </div>
                   </div>
 
@@ -167,11 +167,11 @@ function SimulationResults({ simulations, currentSimulation, onDelete }) {
                   <p>
                     This simulation executed <strong>{selectedSim.totalCloudlets}</strong> cloudlets with 
                     a <strong>{((selectedSim.successfulCloudlets / Math.max(1, selectedSim.totalCloudlets)) * 100).toFixed(1)}%</strong> success rate. 
-                    The total execution time was <strong>{selectedSim.totalExecutionTime.toFixed(2)} seconds</strong>, 
-                    resulting in a total cost of <strong>${selectedSim.totalCostOfExecution.toFixed(2)}</strong>.
+                    The total execution time was <strong>{selectedSim.totalExecutionTime.toFixed(6)} seconds</strong>, 
+                    resulting in a total cost of <strong>${selectedSim.totalCostOfExecution.toFixed(6)}</strong>.
                   </p>
                   <p>
-                    Average per-cloudlet execution time: <strong>{selectedSim.averageCloudletExecutionTime.toFixed(2)} seconds</strong>. 
+                    Average per-cloudlet execution time: <strong>{selectedSim.averageCloudletExecutionTime.toFixed(6)} seconds</strong>. 
                     Simulation completed in <strong>{selectedSim.simulationDuration} milliseconds</strong>.
                   </p>
                 </div>
